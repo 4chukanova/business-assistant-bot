@@ -84,3 +84,30 @@ def main():
 
 if __name__ == "__main__":
     main()
+import logging
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
+
+# Логирование
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Команда /add_knowledge
+def add_knowledge(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Знание успешно добавлено!')
+
+def main():
+    """Запуск бота"""
+    updater = Updater("YOUR_TELEGRAM_TOKEN")  # Замените на ваш токен
+    dispatcher = updater.dispatcher
+
+    # Обработчики команд
+    dispatcher.add_handler(CommandHandler("add_knowledge", add_knowledge))
+
+    # Запуск бота
+    updater.start_polling()
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
