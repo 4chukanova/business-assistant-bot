@@ -17,7 +17,8 @@ async def start(update: Update, context: CallbackContext) -> None:
 
 def main():
     """Запуск бота"""
-    token = "YOUR_TELEGRAM_TOKEN"  # Замените на ваш токен
+    TELEGRAM_TOKEN = "7981898891:AAGYA7UhRbDIy67gWqSCS0ZeJQFRLsisN94"
+  # Замените на ваш токен
 
     # Создаём экземпляр Application
     application = Application.builder().token(token).build()
