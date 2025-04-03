@@ -1,28 +1,33 @@
 
 import logging
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram.ext import Application, CommandHandler, CallbackContext
 
-# Logging setup
+# Логирование
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Command /add_knowledge
-def add_knowledge(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Knowledge has been added!')
+# Команда /add_knowledge
+async def add_knowledge(update: Update, context: CallbackContext) -> None:
+    await update.message.reply_text('Знание успешно добавлено!')
+
+async def start(update: Update, context: CallbackContext) -> None:
+    await update.message.reply_text("Привет, я твой ассистент!")
 
 def main():
-    """Start the bot"""
-    updater = Updater("YOUR_TELEGRAM_TOKEN")  # Replace with your token
-    dispatcher = updater.dispatcher
+    """Запуск бота"""
+    token = "YOUR_TELEGRAM_TOKEN"  # Замените на ваш токен
 
-    # Add command handler
-    dispatcher.add_handler(CommandHandler("add_knowledge", add_knowledge))
+    # Создаём экземпляр Application
+    application = Application.builder().token(token).build()
 
-    # Start the bot
-    updater.start_polling()
-    updater.idle()
+    # Добавляем обработчики команд
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("add_knowledge", add_knowledge))
+
+    # Запуск бота
+    application.run_polling()
 
 if __name__ == '__main__':
     main()

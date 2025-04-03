@@ -1,3 +1,2 @@
-TELEGRAM_TOKEN = "YOUR_TELEGRAM_TOKEN"  # Replace with your token
-delete broken file
-delete broken file
+
+TELEGRAM_TOKEN = "YOUR_TELEGRAM_TOKEN"  # Замените на ваш токен
